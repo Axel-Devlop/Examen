@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    
+
+<div id="app">
+    
+    <header>
+        <h1>La liste de pokémons de Paul</h1>
+        <fieldset>
+            <legend>
+                <label for="filtrer">Filtrer</label>
+            </legend>
+            <label for="search">Par nom : </label>
+            <input @input="filterByName" type="search" name="filtrer" id="search">
+            <div @change= "filterByType">
+                <label for="eau">Par type :  Eau</label>
+                <input type="checkbox" name="type" id="eau">
+                <label for="feu">Feu</label>
+                <input type="checkbox" name="type" id="feu">
+                <label for="plante">Plante</label>
+                <input type="checkbox" name="type" id="plante">
+            </div>
+        </fieldset>
+    </header>
+    <body >
+        <div class="fullFlex">
+            <div :class="pokemon.types[0]" v-for="pokemon in filteredPokemons" :key="id">
+                <article @click="deletePokemon(pokemon)" class="articleFlex">
+                    <h2>Numéro {{ pokemon.id }} : {{ pokemon.name }}</h2>
+                    <h3>Types :</h3>
+                    <ul v-for="type in pokemon.types">
+                        <li>{{ type }}</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </body>
+    <footer>
+
+    </footer>
+
+</div>
+
+
+
+
+<script>
+  const vue = Vue.createApp({
+    data() {
+      return {
+        //variables
+        pokemons: null,
+        filterName: "",
+        filterType: []
+
+      }
+    },
+    methods: {
+        async initPokemons() {
+            this.pokemons = null
+            const res = await fetch("https://paul-bourgeoi5.github.io/data/pokemons.json")
+            this.pokemons = await res.json()
+            
+        },
+
+        filterByName() {
+            this.filterName = event.target.value
+        },
+
+        filterByType() {
+            const div = event.target.parentNode
+            const checked = div.querySelectorAll('input[type=checkbox]:checked')
+            let result = []
+            checked.forEach((input) => result.push(input.value) )
+            this.filterType = result
+        },
+
+        deletePokemon(pokemonToDelete) {
+            this.pokemons = this.pokemons.filter((pokemon) => pokemon.id != pokemonToDelete.id)
+        }
+    },
+
+    computed: {
+        filteredPokemons() {
+            let result
+
+            if(this.filterName.length > 0){
+                result = this.pokemons.filter((pokemon) =>  pokemon.name.toLowerCase().includes(this.filterName.toLowerCase()))
+            } else {
+                result = this.pokemons
+            }
+
+            if(this.filterType.length > 0) { //-------------Ici je comprends par pourquoi il ne trouve pas l'index 1 du tableau types
+                result = result.filter(pokemon => this.filterType.includes(pokemon.types[0].toLowerCase()))
+            }
+
+            return result
+        }
+
+    },
+
+    mounted() {
+        try{
+            this.initPokemons()
+        } catch(err) {
+
+        }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>

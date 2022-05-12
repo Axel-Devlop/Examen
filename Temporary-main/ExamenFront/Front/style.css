@@ -1,0 +1,74 @@
+html{
+    background-color: black;
+    color: rgb(255, 255, 255);
+}
+
+.fullFlex {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.articleFlex {
+    display: flex;
+    flex-flow: column;
+    margin: 3rem;
+    padding: 2rem;
+    border: solid white 1px;
+}
+
+.articleFlex:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.Plante article {
+    color: black;
+    background-color: lightgreen;
+}
+
+.Eau article {
+    color: black;
+    background-color: lightblue;
+}
+
+.Feu article {
+    color: black;
+    background-color: lightcoral;
+}
+
+.Normal article {
+    color: black;
+    background-color: whitesmoke;
+}
+
+.Electrique article {
+    color: black;
+    background-color: lightyellow;
+}
+
+.Sol article {
+    color: black;
+    background-color: bisque;
+}
+
+.Combat article {
+    color: black;
+    background-color: lightpink;
+}
+
+.Vol article {
+    color: black;
+    background-color: lightskyblue;
+}
+
+.Roche article {
+    color: black;
+    background-color: gainsboro;
+}
+
+.Poison article {
+    color: black;
+    background-color: mediumslateblue;
+}

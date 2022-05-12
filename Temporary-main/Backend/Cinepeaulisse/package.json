@@ -1,0 +1,17 @@
+{
+  "name": "cinepeaulisse",
+  "version": "1.0.0",
+  "description": "ECF backend CDA2111",
+  "main": "app.js",
+  "scripts": {
+    "final": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-validator": "^6.14.0",
+    "nodemon": "^2.0.16",
+    "sqlite3": "^5.0.8"
+  }
+}

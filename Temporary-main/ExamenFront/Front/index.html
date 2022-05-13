@@ -81,6 +81,7 @@
             const checked = div.querySelectorAll('input[type=checkbox]:checked')
             let result = []
             checked.forEach((input) => result.push(input.value) )
+            console.log(result)
             this.filterType = result
         },
 
